@@ -47,7 +47,7 @@
         {
           "foreground": "p:kubernetes-text",
           "style": "plain",
-          "template": "<p:ocp-symbol-color>\ue7b7</>{{if .Namespace}} {{.Namespace}} {{end}}",
+          "template": "{{if .Namespace}}<p:ocp-symbol-color>\ue7b7</> {{.Namespace}}{{else}}<p:ocp-symbol-color>\ue7b7</> default {{end}}",
           "type": "kubectl"
         },
         {

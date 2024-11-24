@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+palette:
+  azure-symbol-color: "#0080FF"
+  cloud-text-azure: "#4285F4"
+  kubernetes-text: "#BF616A"
+  ocp-symbol-color: "#FF0000"
+transient_prompt:
+  template: "❯ "
+  foreground: "#B48EAD"
+  foreground_templates:
+  - "{{ if gt .Code 0 }}#BF616A{{ end }}"
+console_title_template: "{{if .Root}}(Admin){{end}} {{.PWD}}"
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      cache_duration: none
+    template: "{{ .UserName }} "
+    foreground: "#BF616A"
+    type: session
+    style: plain
+  - properties:
+      cache_duration: none
+      style: agnoster_short
+    template: "{{ .Path }} "
+    foreground: "#81A1C1"
+    type: path
+    style: plain
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      cache_duration: none
+      fetch_stash_count: true
+      fetch_status: true
+      fetch_upstream_icon: true
+    template: "{{ .UpstreamIcon }}{{ if eq .Ref \"main\" }}<#FF0000>{{ .HEAD }}</>{{ end }}{{ if ne .Ref \"main\" }}{{ .HEAD }}{{ end }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<#FFA500>{{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+    foreground: "#6C6C6C"
+    type: git
+    style: plain
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      cache_duration: none
+    template: "{{if .Namespace}}<p:ocp-symbol-color>\ue7b7</> {{.Namespace}}{{else}}<p:ocp-symbol-color>\ue7b7</> default {{end}}"
+    foreground: p:kubernetes-text
+    type: kubectl
+    style: plain
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      cache_duration: none
+      source: cli
+    template: " <p:azure-symbol-color>\uebd8</> {{ .Name }}"
+    foreground: p:cloud-text-azure
+    type: az
+    style: plain
+  - properties:
+      cache_duration: none
+      source: pwsh
+    template: " <p:azure-symbol-color>\uebd8</> (PS) {{ .Name }}"
+    foreground: p:cloud-text-azure
+    type: az
+    style: plain
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      cache_duration: none
+      style: austin
+    template: " {{ .FormattedMs }} "
+    foreground: "#A3BE8C"
+    type: executiontime
+    style: plain
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      always_enabled: true
+      cache_duration: none
+    template: "❯ "
+    foreground: "#B48EAD"
+    type: status
+    style: plain
+    foreground_templates:
+    - "{{ if gt .Code 0 }}#BF616A{{ end }}"
+  newline: true
+version: 3

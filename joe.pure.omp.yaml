@@ -3,7 +3,8 @@
 palette:
   azure-symbol-color: "#0080FF"
   cloud-text-azure: "#4285F4"
-  kubernetes-text: "#BF616A"
+  openshift-text: "#BF616A"
+  kubernetes-text: "#326CE5"
   ocp-symbol-color: "#FF0000"
 transient_prompt:
   template: "❯ "
@@ -46,6 +47,14 @@ blocks:
   - properties:
       cache_duration: none
     template: "{{if .Namespace}}<p:ocp-symbol-color>\ue7b7</> {{.Namespace}}{{else}}<p:ocp-symbol-color>\ue7b7</> default {{end}}"
+    foreground: p:openshift-text
+    type: kubectl
+    style: plain
+    include_folders:
+    - ~/Development/NGC
+  - properties:
+      cache_duration: none
+    template: "{{if .Namespace}}<p:kubernetes-text>\ue81d</> {{.Namespace}}{{else}}<p:kubernetes-text>\ue81d</> default {{end}}"
     foreground: p:kubernetes-text
     type: kubectl
     style: plain
